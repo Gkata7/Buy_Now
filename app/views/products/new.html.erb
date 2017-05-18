@@ -1,0 +1,27 @@
+<div class="add-product">
+<a href="/products"><button class="btn btn-primary back">Back</button></a>
+<form class="product-form" action="/products" method="post" enctype="multipart/form-data" >
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<div class="form-group">
+	<label for="select">Product Name</label>
+	<input type="text" class="form-control" id="name" name="product[name]" placeholder="Product Name">
+	</div>
+	<div class="form-group">
+	<label for="product[category]">Category</label>
+	<%= select_tag :'product[category]', options_for_select(categories) %>
+	</div>
+	<div class="form-group">
+	<label for="select">Description</label>
+	<input type="text" class="form-control" id="description" name="product[description]" placeholder="Product Desription">
+	</div>
+	<div class="form-group">
+	<label for="select">Price</label>
+	<input type="text" class="form-control" id="price" name="product[price]" placeholder="Price">
+	</div>
+	<div class="form-group">
+	<label for="select">Image</label>
+	<input type="file" class="form-control" id="image" name="product[avatar]" placeholder="Product Image">
+	</div>
+	<button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+</div>

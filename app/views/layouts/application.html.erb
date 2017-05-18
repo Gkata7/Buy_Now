@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ecom</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller.controller_name %>">
+
+<%= yield %>
+<script>
+  $(document).ready(function(){
+    $("#logout-button").click(function(){
+      $("#logout").submit();
+    })
+    $("#update-cart").click(function(){
+      $("#update-cart-form").submit();
+    })
+    $('.review-form').submit(function(){
+      $.post(
+        $(this).attr('action'),
+        $(this).serialize(),
+        function(data){
+          var newStr = '';
+          var fill_in = '';
+          for(var i = 0; i < data[0].rating; i++){
+            fill_in += "<span class='glyphicon glyphicon-star'></span> "
+          }
+          var blank = '';
+          for(var j = 0; j < (5 - data[0].rating); j++){
+            blank += "<span class='glyphicon glyphicon-star-empty'></span> "
+          }
+          newStr += "<div class='new-review row'><div class='data col-md-12'><div class='ratings'>"
+          newStr += fill_in + blank + " "
+          newStr += data[0].first_name + "</div>"
+          newStr += "<span class='pull-right'>" + data[1] + "</span>"
+          newStr += "<p class='data-text'>" + data[0].content + "</p></div></div>"
+          $('.review-container').prepend(newStr);
+        },
+        "json"
+      );
+      return false;
+    }); 
+  });
+</script>
+</body>
+</html>

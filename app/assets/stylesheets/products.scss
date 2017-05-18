@@ -1,0 +1,161 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.products {
+
+	.navbar-default {
+		margin-bottom: 0px;
+	}
+
+		.navbar-default a {
+			color: #424242;
+			font-family: 'Oswald';
+		}
+
+	.navbar-header {
+		padding-left: 60px;
+	}
+
+	.navbar-right {
+		padding-right: 30px;
+	}
+
+		.navbar-brand {
+			font-size: 225%;
+		}
+
+	.product-page {
+		width: 100%;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	.index-col1 {
+		margin-top: 9%;
+		margin-left: 0.75%;
+		width: 20%;
+		border: 1px solid darkgrey;
+		border-radius: 5px;
+		padding: 10px 10px;
+	}
+
+
+	.col-md-12 {
+		margin-top: 8%;
+	}
+
+	.index-col2 {
+		margin-left: 0.75%;
+		width: 60%;
+	}
+
+	.index-col3 {
+		margin: 5% 0px 0px 15%;
+	}
+
+		.search-form {
+			width: 90%;
+		}
+
+	.pull-right {
+		margin-left: 3px;
+	}
+	#product_category {
+		width: 100%;
+		margin-bottom: 10px;
+		height: 35px;
+	}
+
+	.index-col3 h4 {
+		margin-top: 2%;
+	}
+
+	.row1 {
+		width: 100%;
+		margin-top: 30px;
+	}
+
+	.row-2 {
+		margin: 0px auto;
+	}
+
+	.caption-2 {
+		width: 100%;
+		margin-right: 0px;
+	}
+
+	.description {
+		overflow: hidden;
+		height:	40px;
+	
+	}
+
+	.thumbnail {
+		height: 317px;
+		border: 1px solid darkgrey;
+	}
+
+	.add-product {
+		width: 35%;
+		margin: 40px auto;
+		padding-top: 40px;
+	}
+
+	.product-form {
+		margin-top: 30px;
+		width: 90%;
+	}
+
+	.product-all {
+		 height: 150px;
+	}
+
+	.carousel {
+		margin-bottom: 10px;
+	}
+		.carousel-control {
+			border-radius: 3.5px;
+		}
+
+		.product-image {
+			width: 800px;
+			height: 350px;
+			margin-top: 5%;
+		}
+
+		.product-img {
+			height: 350px;
+		    display: block;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
+
+		img.top-product, img.hot-products {
+			margin: 0px auto;
+			height: 350px;
+		}
+
+		.star {
+			display: inline-block;
+		}
+		
+		.review { 
+			margin-top: 4%;
+		}
+
+		.new-review {
+			height: 59px;
+		}
+		
+		.review-form h4 {
+			text-decoration: underline;
+			margin-bottom: 12px;
+			margin-top: 0;
+		}
+		
+		.review-form textarea {
+			margin-bottom: 5px;
+		}
+
+}

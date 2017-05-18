@@ -1,0 +1,73 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/products">BuyNow</a>
+      <a href="/products"><img class="navbar-brand" id="logo" src="<%= asset_path( 'buynow.png' ) %>" /></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user.admin == true %>
+          <li><a href="/products/new">Add Inventory</a></li>
+        <% end %>
+        <% if current_user.avatar_file_name == nil %>
+        <a href="/users/<%= current_user.id %>"><img class="navbar-brand" id="profile-thumb" src="<%= asset_path( 'face.png' ) %>" /></a>
+        <% else %>
+        <a href="/users/<%= current_user.id %>"><%= image_tag current_user.avatar.url, :class => 'navbar-brand', :id => 'profile-thumb' %></a>
+        <% end %>
+        <li><a href="/users/<%= current_user.id %>"><%= current_user.first_name %></a></li>
+        <li><a href="/carts/<%= current_user.id %>">My Cart <%= session[:in_cart] %> </a></li>
+        <li>
+            <a id="logout-button" href="#">Logout</a>
+                <form id="logout" action="/sessions" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                    <input type="hidden" name="_method" value="delete">
+            </form>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="cart">
+  <h2>Shopping Cart</h2>
+  <table class="table table-hover">
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th class="price">Price</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td>
+          <form id="update-cart-form" action="/carts/<%= item.product.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="patch">
+            <input class="quantity" min="1" type="number" name="amount" value="<%= item.quantity %>">
+            <input class="btn btn-primary btn-xs" type="submit" value="Update">
+          </form>
+          <a href="/carts/<%= item.id %>" data-method="delete">X</a>
+        </td>
+        <td class="price">$<%= '%.2f' % item.product.price %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="price"><b>Subtotal</b> $<%= '%.2f' % session[:subtotal].round(2) %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="checkout"><a href="/checkouts/<%= current_user.id %>"><button class="btn btn-success btn-sm">Checkout</button></a></td>
+    </tr>
+  </table>
+</div>

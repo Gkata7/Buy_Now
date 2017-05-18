@@ -1,0 +1,171 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/products">BuyNow</a>
+      <a href="/products"><img class="navbar-brand" id="logo" src="<%= asset_path( 'buynow.png' ) %>" /></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user.avatar_file_name == nil %>
+        <a href="/users/<%= current_user.id %>"><img class="navbar-brand" id="profile-pic" src="<%= asset_path( 'face.png' ) %>" /></a>
+        <% else %>
+        <a href="/users/<%= current_user.id %>"><%= image_tag current_user.avatar.url, :class => 'navbar-brand profile-pic', :id => 'profile-pic' %></a>
+        <% end %>
+        <li><a href="/users/<%= current_user.id %>"><%= current_user.first_name %></a></li>
+        <li><a href="/carts/<%= current_user.id %>">My Cart <%= session[:in_cart] %></a></li>
+        <li>
+            <a id="logout-button" href="#">Logout</a>
+                <form id="logout" action="/sessions" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                    <input type="hidden" name="_method" value="delete">
+            </form>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row-2">
+
+            <div class="col-md-9 index-col3">
+
+                <div class="thumbnail-2">
+
+                    <div class="caption-2">
+                        <%= image_tag @product.avatar.url, :class => "product-image" %>
+                        <h4 class="pull-right">$<%= '%.2f' %  @product.price %></h4>
+                        <h4><%= @product.name %></h4>
+                        <div class="caption-full">
+                        <p><%= @product.description %></p>
+                    </div>
+                    <br>
+                    <form action="/carts" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="number" name="amount" min="1" value="1">
+                        <input type="hidden" name="product_id" value="<%= @product.id %>">              
+                		<button type="submit" class="btn btn-primary">Add to Cart</button>
+            			<%= flash[:success] %>
+        		    </form>
+                    <br>
+                    <div class="ratings">
+                        <p class="pull-right"><%= @reviews.count %> reviews</p>
+                         <div class="ratings">
+                           <% if @avg_rating %>
+            			    <% (1..@avg_rating).each do %>
+                            <p class="star">
+                                <span class="glyphicon glyphicon-star"></span>
+                            </p>
+                            <% end %>
+                            <% (1..(5 - @avg_rating)).each do %>
+                            <p class="star">
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </p>
+                            <% end %>
+                            <%= '%.1f' % @avg_rating %> stars
+                       	   <% end %>
+            			 </div>
+                    </div>
+                </div>
+
+                <div class="well">
+		    <form action="/reviews" method="post" class="review-form">
+                <h4>Leave a Review</h4>
+    			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <input type="hidden" name="review[product]" value="<%= @product.id %>" />
+                <label for="review[rating]">Rating:</label>
+                <%= select_tag :"review[rating]", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe %>
+                <br>
+    			<textarea name="review[content]" placeholder="Review" class="form-control" cols="30" rows="3"></textarea>
+                <%= flash[:review_error] %>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-success">Post It</button>
+                </div>
+		    </form>
+            <div class="review-container">
+    		   <% if @reviews %>
+                    <% @reviews.each do |review| %>
+                    <div class="row">
+                        <div class="review col-md-12">
+                            <div class="ratings">
+                                <% (1..review.rating).each do %>
+                                
+                                    <span class="glyphicon glyphicon-star"></span>
+                                
+                                <% end %>
+                                <% (1..(5 - review.rating)).each do %>
+                                
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                
+                                <% end %>
+                       	     <%= review.user.first_name %>
+            			    </div>
+                            <span class="pull-right"><%= review.created_at.strftime("%B %d, %Y") %></span>
+                            <p class="review-text"><%= review.content %></p>
+                        </div>
+                    </div>
+                    <% end %>
+    		    <% end %>
+            </div>
+
+                    <div class="row">
+                        <div class="review col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            George Washington
+                            <span class="pull-right">November, 15 1776</span>
+                            <p>I've alredy ordered another one!</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="review col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Abraham Lincoln
+                            <span class="pull-right">February 26, 1845</span>
+                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="containter">
+
+        <!-- Footer -->
+        <footer>
+            <div class="row"></div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js">
+    </script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>

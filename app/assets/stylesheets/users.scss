@@ -1,0 +1,143 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body.users {
+
+	.landing-page{
+		background-image: url("back1.png");
+		margin: 0px auto;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		width: 100%;
+		height: 980px;
+		padding: 20px 60px 0px 40px;
+	}
+
+	form {
+		margin-top: 50px;
+	}
+
+	h2 {
+		border-radius: 5px;
+		color: black;
+		padding: 5px;
+		width: 180px;
+	}
+
+	.form-control {
+		border: 2px solid darkgrey;
+	}
+
+	#reg, #login {
+		display: block;
+	}
+
+	#login {
+		margin-left: 65%;
+		margin-top: 8%;
+	}
+
+	#reg {
+		width: 28%;
+		margin-left: 65%;
+		display: inline-block;
+		margin-top: 4%;
+	}
+
+	.login-head, .login-form { 
+		display: inline;
+		vertical-align: top;
+	}
+
+	.login-head {
+		padding: 2px 5px;
+	}
+
+	.error {
+		margin-bottom: 5px;
+	}
+
+	.navbar-default {
+		height: 50px;
+		margin-bottom: 0px;
+	}
+
+		.navbar-default a {
+			color: #424242;
+			font-family: 'Oswald';
+		}
+
+	.navbar-header {
+		padding-left: 60px;
+	}
+
+	.navbar-right {
+		padding-right: 30px;
+	}
+
+		.navbar-brand {
+			font-size: 225%;
+		}
+
+	.row3 {
+		margin: 0px auto;
+		width: 50%;
+	}
+
+		.col3 {
+			width: 100%;
+	 	}
+
+	#orders {
+		margin-left: 9%;
+	}
+
+	#orders h2 {
+		width: 100%;
+	}
+
+	#home-logo {
+		font-size: 130px;
+		display: inline-block;
+		margin-top: 0;
+	}
+
+	#profile {
+		margin-left: 6%;
+	}
+
+		ul {
+			list-style-type: none;
+			padding-left: 0px;
+		}
+
+		.profile-name {
+			padding-left: 0px;
+			width: 100%;
+			margin-top: 0px;
+			margin-right: 0px;
+			padding-right: 0px;
+		}
+
+		#profile-thumb {
+			max-height: 10%;
+		}
+
+		#profile-pic {
+			max-width: 100%;
+			padding: 0px;
+		}
+		
+		.change-pic {
+			display: none;
+			text-decoration: underline;	
+			margin-left: 10px;
+		}
+	
+	.row4 {
+                margin: 0px auto;
+                width: 100%;
+        }
+}
