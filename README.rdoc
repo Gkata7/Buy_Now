@@ -1,3 +1,6 @@
 This is an ecommerce website written in Ruby on Rails. Database is PostgreSQL.
 
 The website uses Ajax to display product reviews. Currently deployed via AWS at http://54.244.33.63.
+
+
+Heroku deployment: https://buythisappnow.herokuapp.com/
