@@ -33,7 +33,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'hirb'
 gem 'pry'
 
-gem 'paperclip', '~>4.2'
 
 #gem 'kaminari'
 
